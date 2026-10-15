@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { localizeStatus } from '../i18n.js';
 import type { OfficeState } from '../office/engine/officeState.js';
 import type { ToolActivity } from '../office/types.js';
 import { transport } from '../transport/index.js';
@@ -46,7 +47,7 @@ function ToolLine({ tool }: { tool: ToolActivity }) {
       className={`text-base flex items-center gap-5 ${tool.done ? 'opacity-50' : 'opacity-80'}`}
     >
       <ToolDot tool={tool} />
-      {tool.permissionWait && !tool.done ? 'Needs approval' : tool.status}
+      {tool.permissionWait && !tool.done ? '需要核准' : localizeStatus(tool.status)}
     </span>
   );
 }
@@ -123,7 +124,7 @@ export function DebugView({
               transport.send({ type: 'closeAgent', id });
             }}
             className={`opacity-70 ${isSelected ? 'text-white' : ''}`}
-            title="Close agent"
+            title="關閉代理人"
           >
             ✕
           </Button>
@@ -147,7 +148,7 @@ export function DebugView({
               officeState.characters.get(id)?.waitingAwaitingInput && (
                 <span className="text-base opacity-85 flex items-center gap-5">
                   <span className="w-6 h-6 rounded-full inline-block shrink-0 bg-status-permission" />
-                  Waiting for input
+                  等待輸入
                 </span>
               )}
           </div>
@@ -184,7 +185,7 @@ export function DebugView({
   return (
     <div className="absolute inset-0 overflow-auto bg-bg z-15">
       <div className="px-12 py-6 text-2xl">
-        <h2 className="text-3xl font-bold mb-8">Debug View</h2>
+        <h2 className="text-3xl font-bold mb-8">除錯檢視</h2>
         <div className="flex flex-col gap-6">{agents.map(renderAgentCard)}</div>
       </div>
     </div>

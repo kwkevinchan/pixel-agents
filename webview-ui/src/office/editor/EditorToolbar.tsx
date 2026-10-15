@@ -239,51 +239,51 @@ export function EditorToolbar({
           variant={isFurnitureActive ? 'active' : 'default'}
           size="md"
           onClick={() => onToolChange(EditTool.FURNITURE_PLACE)}
-          title="Place furniture"
+          title="擺放家具"
         >
-          Furniture
+          家具
         </Button>
         <Button
           variant={isFloorActive ? 'active' : 'default'}
           size="md"
           onClick={() => onToolChange(EditTool.TILE_PAINT)}
-          title="Paint floor tiles"
+          title="繪製地板"
         >
-          Floor
+          地板
         </Button>
         <Button
           variant={isWallActive ? 'active' : 'default'}
           size="md"
           onClick={() => onToolChange(EditTool.WALL_PAINT)}
-          title="Paint walls (click to toggle)"
+          title="繪製牆壁（點擊切換）"
         >
-          Walls
+          牆壁
         </Button>
         <Button
           variant={isPetsActive ? 'active' : 'default'}
           size="md"
           onClick={() => onToolChange(EditTool.PETS)}
-          title="Place pets"
+          title="擺放寵物"
         >
-          Pets
+          寵物
         </Button>
         {areasAvailable && (
           <Button
             variant={isAreasActive ? 'active' : 'default'}
             size="md"
             onClick={() => onToolChange(EditTool.AREA_PAINT)}
-            title="Define folder-bound areas — agents spawn in their folder's area"
+            title="定義與資料夾綁定的區域：代理人會出現在自己資料夾的區域"
           >
-            Areas
+            區域
           </Button>
         )}
         <Button
           variant={isEraseActive ? 'active' : 'default'}
           size="md"
           onClick={() => onToolChange(EditTool.ERASE)}
-          title="Erase tiles to void"
+          title="清除格子（變成空白）"
         >
-          Erase
+          清除
         </Button>
       </div>
 
@@ -296,17 +296,17 @@ export function EditorToolbar({
               variant={activeTool === EditTool.EYEDROPPER ? 'active' : 'ghost'}
               size="sm"
               onClick={() => onToolChange(EditTool.EYEDROPPER)}
-              title="Pick floor pattern + color from existing tile"
+              title="從現有格子取得地板花紋與顏色"
             >
-              Pick
+              取色
             </Button>
             <Button
               variant={showColor ? 'active' : 'ghost'}
               size="sm"
               onClick={() => setShowColor((v) => !v)}
-              title="Adjust floor color"
+              title="調整地板顏色"
             >
-              Color
+              顏色
             </Button>
           </div>
 
@@ -319,7 +319,7 @@ export function EditorToolbar({
                 height={32}
                 selected={selectedTileType === patIdx}
                 onClick={() => onTileTypeChange(patIdx as TileTypeVal)}
-                title={`Floor ${patIdx}`}
+                title={`地板 ${patIdx}`}
                 deps={[patIdx, floorColor]}
                 draw={(ctx, w, h) => {
                   if (!hasFloorSprites()) {
@@ -348,9 +348,9 @@ export function EditorToolbar({
               variant={showWallColor ? 'active' : 'default'}
               size="sm"
               onClick={() => setShowWallColor((v) => !v)}
-              title="Adjust wall color"
+              title="調整牆壁顏色"
             >
-              Color
+              顏色
             </Button>
           </div>
 
@@ -364,7 +364,7 @@ export function EditorToolbar({
                   height={64}
                   selected={selectedWallSet === i}
                   onClick={() => onWallSetChange(i)}
-                  title={`Wall ${i + 1}`}
+                  title={`牆壁 ${i + 1}`}
                   deps={[i, wallColor]}
                   draw={(ctx, w, h) => {
                     const sprite = getWallSetPreviewSprite(i);
@@ -431,13 +431,12 @@ export function EditorToolbar({
         <div className="flex flex-col-reverse gap-4 pb-2">
           <AreaAddRow areas={areas} onAddArea={onAddArea} />
           <div className="text-xs text-text-muted px-4 leading-none">
-            Paint areas on the map, then assign workspace folders. Agents will sit in their folder's
-            area.
+            在地圖上繪製區域，再指定工作區資料夾。代理人會坐在自己資料夾的區域裡。
           </div>
           {/* Fixed 4-per-row grid; no overflow clip, or the upward Add-folder dropdown is cut off. */}
           <div className="grid grid-cols-[repeat(4,130px)] gap-4">
             {areas.length === 0 ? (
-              <span className="text-xs text-text-muted italic">No areas yet — add one above</span>
+              <span className="text-xs text-text-muted italic">還沒有區域，請在上方新增</span>
             ) : (
               areas.map((area) => (
                 <AreaCard
@@ -487,9 +486,9 @@ export function EditorToolbar({
                   setActiveCategory(CARPET_CATEGORY_ID);
                   onToolChange(EditTool.CARPET_PAINT);
                 }}
-                title="Paint carpets"
+                title="繪製地毯"
               >
-                Carpet
+                地毯
               </Button>
             )}
             <div className="w-[1px] h-14 bg-white/15 mx-2 shrink-0" />
@@ -504,18 +503,18 @@ export function EditorToolbar({
                       : EditTool.CARPET_PICK,
                   )
                 }
-                title="Pick carpet variant + colors from existing tile (P)"
+                title="從現有格子取得地毯款式與顏色（P）"
               >
-                Pick
+                取色
               </Button>
             ) : (
               <Button
                 variant={activeTool === EditTool.FURNITURE_PICK ? 'active' : 'ghost'}
                 size="sm"
                 onClick={() => onToolChange(EditTool.FURNITURE_PICK)}
-                title="Pick furniture type from placed item"
+                title="從已擺放的物件取得家具種類"
               >
-                Pick
+                取色
               </Button>
             )}
             {/* Color toggle — available across the whole Furniture tab. Carpet
@@ -533,12 +532,10 @@ export function EditorToolbar({
                   : setShowFurnitureColor((v) => !v)
               }
               title={
-                activeCategory === CARPET_CATEGORY_ID
-                  ? 'Adjust carpet main + accent colors'
-                  : 'Adjust color for new furniture'
+                activeCategory === CARPET_CATEGORY_ID ? '調整地毯主色與輔色' : '調整新家具的顏色'
               }
             >
-              Color
+              顏色
             </Button>
           </div>
 
@@ -561,7 +558,7 @@ export function EditorToolbar({
                         onToolChange(EditTool.CARPET_PAINT);
                       }
                     }}
-                    title={`Carpet ${variantIdx + 1}`}
+                    title={`地毯 ${variantIdx + 1}`}
                     deps={[variantIdx, carpetColor, carpetAccentColor]}
                     draw={(ctx, w, h) => drawCarpetPreview(ctx, w, h, variantIdx)}
                   />
@@ -574,13 +571,13 @@ export function EditorToolbar({
                 <div className="flex gap-8 ml-2 mb-6 -mt-6">
                   <div className="flex flex-col gap-2">
                     <span className="text-xs uppercase tracking-[0.08em] text-text-muted">
-                      Main
+                      主色
                     </span>
                     <VisualColorPicker value={carpetColor} onChange={onCarpetColorChange} />
                   </div>
                   <div className="flex flex-col gap-2">
                     <span className="text-xs uppercase tracking-[0.08em] text-text-muted">
-                      Accent
+                      輔色
                     </span>
                     <VisualColorPicker
                       value={carpetAccentColor}
@@ -645,18 +642,18 @@ export function EditorToolbar({
               variant={showFurnitureColor ? 'active' : 'default'}
               size="sm"
               onClick={() => setShowFurnitureColor((v) => !v)}
-              title="Adjust selected furniture color"
+              title="調整選取家具的顏色"
             >
-              Color
+              顏色
             </Button>
             {selectedFurnitureColor && (
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => onSelectedFurnitureColorChange(null)}
-                title="Remove color (restore original)"
+                title="移除顏色（還原原色）"
               >
-                Clear
+                清除
               </Button>
             )}
           </div>
@@ -691,11 +688,11 @@ function TileColorBox({
   return (
     <div className="flex flex-col gap-4 py-8 px-10 bg-bg-dark border-2 border-border rounded-none">
       <div className="flex items-center gap-8">
-        <span className="text-sm text-text-muted w-64 shrink-0">Color</span>
+        <span className="text-sm text-text-muted w-64 shrink-0">顏色</span>
         <VisualColorPicker value={value} onChange={onChange} />
       </div>
       <div className="flex items-center gap-8">
-        <span className="text-sm text-text-muted w-64 shrink-0">Contrast</span>
+        <span className="text-sm text-text-muted w-64 shrink-0">對比</span>
         <input
           type="range"
           min={-100}
@@ -741,11 +738,11 @@ function AreaAddRow({
             handleSubmit();
           }
         }}
-        placeholder="Area name…"
+        placeholder="區域名稱…"
         className="flex-1 text-sm py-2 px-6 bg-bg-dark border-2 border-border rounded-none text-text"
       />
-      <Button variant="default" size="sm" onClick={handleSubmit} title="Add a new Area">
-        Add Area
+      <Button variant="default" size="sm" onClick={handleSubmit} title="新增區域">
+        新增區域
       </Button>
     </div>
   );
@@ -812,7 +809,7 @@ function AreaCard({
           onChange={(e) => onColorChange(e.target.value)}
           onClick={(e) => e.stopPropagation()}
           className="w-24 h-24 p-0 border-2 border-border bg-transparent cursor-pointer"
-          title="Area color"
+          title="區域顏色"
         />
         {renaming ? (
           <input
@@ -839,7 +836,7 @@ function AreaCard({
               setRenaming(true);
             }}
             className="flex-1 text-sm text-text overflow-hidden text-ellipsis whitespace-nowrap"
-            title={`${area.label} — double-click to rename`}
+            title={`${area.label}（按兩下可重新命名）`}
           >
             {area.label}
           </span>
@@ -851,7 +848,7 @@ function AreaCard({
             e?.stopPropagation();
             onRemove();
           }}
-          title="Remove area"
+          title="移除區域"
         >
           x
         </Button>
@@ -859,7 +856,7 @@ function AreaCard({
 
       <div className="flex flex-col gap-2 max-h-80 overflow-y-auto pixel-scrollbar">
         {mappedFolders.length === 0 ? (
-          <span className="text-xs text-text-muted italic">No folders mapped</span>
+          <span className="text-xs text-text-muted italic">尚未對應資料夾</span>
         ) : (
           mappedFolders.map((folder) => (
             <div key={folder} className="flex items-center gap-4 py-1 px-2">
@@ -876,7 +873,7 @@ function AreaCard({
                   e?.stopPropagation();
                   onAreaMappingChange(folder, area.label, 'remove');
                 }}
-                title="Unmap folder"
+                title="取消對應資料夾"
               >
                 x
               </Button>
@@ -894,9 +891,9 @@ function AreaCard({
             if (availableFolders.length === 0) return;
             setAddFolderOpen((v) => !v);
           }}
-          title={availableFolders.length === 0 ? 'All folders already mapped' : 'Map a folder…'}
+          title={availableFolders.length === 0 ? '所有資料夾都已對應' : '對應資料夾…'}
         >
-          Add folder…
+          新增資料夾…
         </Button>
         <Dropdown isOpen={addFolderOpen}>
           {availableFolders.map((f) => (

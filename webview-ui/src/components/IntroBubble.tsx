@@ -217,10 +217,10 @@ export function IntroBubble({
   };
 
   const titles = [
-    'Welcome to Pixel Agents!',
-    'Powered by Claude Code',
+    '歡迎來到 Pixel Agents！',
+    '由 Claude Code 驅動',
     headline,
-    installFailed ? "Hooks couldn't be installed" : "You're all set!",
+    installFailed ? '無法安裝掛勾' : '設定完成！',
   ];
 
   return (
@@ -261,7 +261,7 @@ export function IntroBubble({
         <Button
           variant="ghost"
           size="icon"
-          aria-label="Close"
+          aria-label="關閉"
           className="absolute top-4 right-4"
           onClick={onClose}
         >
@@ -269,7 +269,7 @@ export function IntroBubble({
         </Button>
 
         {/* Step dots: the tour's "1 of 4", drawn as pixels rather than prose. */}
-        <div className="flex gap-4 mb-8" aria-label={`Step ${step + 1} of ${STEP_COUNT}`}>
+        <div className="flex gap-4 mb-8" aria-label={`第 ${step + 1} 步，共 ${STEP_COUNT} 步`}>
           {Array.from({ length: STEP_COUNT }, (_, i) => (
             <div
               key={i}
@@ -283,22 +283,22 @@ export function IntroBubble({
 
         {step === WELCOME_STEP && (
           <p className="text-sm m-0 mb-8">
-            In this office, your AI agents become tiny pixel characters: they type at their desks
-            while they work, wander off when they're done, and speak up when they need you.
+            在這間辦公室裡，你的 AI
+            代理人會變成小小的像素角色：工作時在桌前打字，完成後四處走動，需要你時會出聲提醒。
           </p>
         )}
 
         {step === CLAUDE_CODE_STEP && (
           <>
             <p className="text-sm m-0 mb-8">
-              The office watches your Claude Code sessions and brings them to life in here. New to
-              Claude Code? Download it first:
+              辦公室會監看你的 Claude Code 對話，讓它們在這裡活起來。還沒用過 Claude
+              Code？請先安裝：
             </p>
             <div className="text-sm bg-btn-bg border-2 border-border py-4 px-8 mb-8 select-all">
               {CLAUDE_CODE_INSTALL_COMMAND}
             </div>
             <p className="text-sm m-0 mb-8">
-              For more info, visit{' '}
+              更多資訊請見{' '}
               <a
                 href={CLAUDE_CODE_URL}
                 target="_blank"
@@ -322,14 +322,12 @@ export function IntroBubble({
           <>
             {installFailed ? (
               <p className="text-sm m-0 mb-8">
-                Something went wrong writing to your Claude Code settings, so the office will watch
-                your sessions the slower way instead. No worries, everything still works and you can
-                retry activating them any time from Settings.
+                寫入 Claude Code
+                設定時發生問題，辦公室會改用較慢的方式監看你的對話。別擔心，一切仍可正常運作，你隨時可以到設定裡重試啟用。
               </p>
             ) : null}
             <p className="text-sm m-0 mb-8">
-              Enjoy your new office! Questions, ideas, or pixel art to show off? Come hang out in
-              our Discord.
+              享受你的新辦公室！有問題、想法，或想展示像素美術？歡迎來我們的 Discord 逛逛。
             </p>
             <p className="text-base text-center m-0 mt-12 mb-12">
               <a
@@ -339,7 +337,7 @@ export function IntroBubble({
                 className="inline-flex items-center gap-8 text-accent-bright hover:text-accent no-underline"
               >
                 <DiscordIcon />
-                Join our Discord!
+                加入我們的 Discord！
               </a>
             </p>
           </>
@@ -358,7 +356,7 @@ export function IntroBubble({
               className={installPending ? 'opacity-[var(--btn-disabled-opacity)]' : ''}
               onClick={back}
             >
-              Back
+              上一步
             </Button>
           )}
 
@@ -371,7 +369,7 @@ export function IntroBubble({
                 className={installPending ? 'opacity-[var(--btn-disabled-opacity)]' : ''}
                 onClick={() => choose('never')}
               >
-                Don't Ask Again
+                不要再問
               </Button>
               <Button
                 variant={installPending ? 'disabled' : 'default'}
@@ -379,7 +377,7 @@ export function IntroBubble({
                 disabled={installPending}
                 onClick={() => choose('notNow')}
               >
-                Not Now
+                現在不要
               </Button>
               <Button
                 variant={installPending ? 'disabled' : 'accent'}
@@ -387,16 +385,16 @@ export function IntroBubble({
                 disabled={installPending}
                 onClick={() => choose('install')}
               >
-                {installPending ? 'Installing...' : 'Install Hooks'}
+                {installPending ? '安裝中…' : '安裝掛勾'}
               </Button>
             </div>
           ) : step === CLOSING_STEP ? (
             <Button variant="accent" size="sm" onClick={onClose}>
-              Let's Go
+              開始吧
             </Button>
           ) : (
             <Button variant="default" size="sm" onClick={forward}>
-              Continue
+              繼續
             </Button>
           )}
         </div>

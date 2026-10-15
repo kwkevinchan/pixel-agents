@@ -63,8 +63,8 @@ export function SettingsModal({
   const [assetDirDraft, setAssetDirDraft] = useState('');
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Settings">
-      {/* Open Sessions Folder opens an OS file manager — impossible in the browser. */}
+    <Modal isOpen={isOpen} onClose={onClose} title="設定">
+      {/* 開啟對話紀錄資料夾 opens an OS file manager — impossible in the browser. */}
       {!isBrowserRuntime && (
         <MenuItem
           onClick={() => {
@@ -72,7 +72,7 @@ export function SettingsModal({
             onClose();
           }}
         >
-          Open Sessions Folder
+          開啟對話紀錄資料夾
         </MenuItem>
       )}
       <MenuItem
@@ -85,7 +85,7 @@ export function SettingsModal({
           onClose();
         }}
       >
-        Export Layout
+        匯出配置
       </MenuItem>
       <MenuItem
         onClick={() => {
@@ -98,7 +98,7 @@ export function SettingsModal({
           }
         }}
       >
-        Import Layout
+        匯入配置
       </MenuItem>
       {isBrowserRuntime && (
         <input
@@ -123,7 +123,7 @@ export function SettingsModal({
           <input
             type="text"
             value={assetDirDraft}
-            placeholder="Absolute asset directory path"
+            placeholder="素材資料夾的完整路徑"
             onChange={(e) => setAssetDirDraft(e.target.value)}
             className="flex-1 min-w-0 text-xs py-2 px-4 bg-bg border-2 border-border rounded-none text-text"
           />
@@ -138,7 +138,7 @@ export function SettingsModal({
             }}
             className="shrink-0"
           >
-            Add
+            新增
           </Button>
         </div>
       ) : (
@@ -148,7 +148,7 @@ export function SettingsModal({
             onClose();
           }}
         >
-          Add Asset Directory
+          新增素材資料夾
         </MenuItem>
       )}
       {externalAssetDirectories.map((dir) => (
@@ -170,7 +170,7 @@ export function SettingsModal({
         </div>
       ))}
       <Checkbox
-        label="Sound Notifications"
+        label="音效通知"
         checked={soundLocal}
         onChange={() => {
           const newVal = !isSoundEnabled();
@@ -180,17 +180,13 @@ export function SettingsModal({
         }}
       />
       <Checkbox
-        label="Watch All Sessions"
+        label="監看所有對話"
         checked={watchAllSessions}
         onChange={onToggleWatchAllSessions}
       />
+      <Checkbox label="即時偵測（掛勾）" checked={hooksInstalled} onChange={onToggleHooksEnabled} />
       <Checkbox
-        label="Instant Detection (Hooks)"
-        checked={hooksInstalled}
-        onChange={onToggleHooksEnabled}
-      />
-      <Checkbox
-        label="Always Show Labels"
+        label="一律顯示標籤"
         checked={alwaysShowOverlay}
         onChange={onToggleAlwaysShowOverlay}
       />
@@ -198,15 +194,15 @@ export function SettingsModal({
           Standalone has no terminals at all, so nothing there would ever ghost. */}
       {!isBrowserRuntime && (
         <Checkbox
-          label="Display Headless as Ghosts"
+          label="無介面代理人顯示為幽靈"
           checked={ghostHeadlessAgents}
           onChange={onToggleGhostHeadlessAgents}
         />
       )}
       {showAreasAvailable && (
-        <Checkbox label="Show Areas" checked={showAreas} onChange={onToggleShowAreas} />
+        <Checkbox label="顯示區域" checked={showAreas} onChange={onToggleShowAreas} />
       )}
-      <Checkbox label="Debug View" checked={isDebugMode} onChange={onToggleDebugMode} />
+      <Checkbox label="除錯檢視" checked={isDebugMode} onChange={onToggleDebugMode} />
     </Modal>
   );
 }

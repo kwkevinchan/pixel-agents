@@ -62,28 +62,28 @@ export function ColorPicker({
   return (
     <div className="flex flex-col py-8 px-10 bg-bg-dark border-2 border-border rounded-none">
       <ColorSlider
-        label="Hue"
+        label="色相"
         value={value.h}
         min={isColorize ? 0 : -180}
         max={isColorize ? 360 : 180}
         onChange={(v) => handleChange('h', v)}
       />
       <ColorSlider
-        label="Saturation"
+        label="飽和度"
         value={value.s}
         min={isColorize ? 0 : -100}
         max={100}
         onChange={(v) => handleChange('s', v)}
       />
       <ColorSlider
-        label="Brightness"
+        label="亮度"
         value={value.b}
         min={-100}
         max={100}
         onChange={(v) => handleChange('b', v)}
       />
       <ColorSlider
-        label="Contrast"
+        label="對比"
         value={value.c}
         min={-100}
         max={100}
@@ -99,9 +99,9 @@ export function ColorPicker({
               type="button"
               onClick={() => onChange({ ...value, colorize: !value.colorize || undefined })}
               className="flex items-center gap-8 shrink-0 bg-transparent border-0 p-0 cursor-pointer text-left"
-              title="Toggle colorize mode"
+              title="切換上色模式"
             >
-              <span className="text-sm text-text-muted w-64 shrink-0">Colorize</span>
+              <span className="text-sm text-text-muted w-64 shrink-0">上色</span>
               <span
                 className={`w-18 h-18 border-2 border-border inline-flex items-center justify-center text-2xs leading-none text-text shrink-0 ${
                   value.colorize ? 'bg-accent' : 'bg-bg'
@@ -120,14 +120,8 @@ export function ColorPicker({
             <span className="flex-1" />
           )}
           {onReset && (
-            <Button
-              variant="default"
-              size="sm"
-              onClick={onReset}
-              title="Reset to default"
-              className="mt-6"
-            >
-              Reset
+            <Button variant="default" size="sm" onClick={onReset} title="還原預設" className="mt-6">
+              還原
             </Button>
           )}
         </div>

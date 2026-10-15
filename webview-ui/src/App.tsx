@@ -268,10 +268,7 @@ function App() {
     (file: File) => {
       // Browser-native import (standalone): read + validate + apply directly,
       // bypassing the layoutLoaded message whose dirty guard would skip it.
-      if (
-        isEditDirty() &&
-        !window.confirm('Replace the current layout? Unsaved edits will be lost.')
-      ) {
+      if (isEditDirty() && !window.confirm('要取代目前的配置嗎？尚未儲存的修改會遺失。')) {
         return;
       }
       const reader = new FileReader();
@@ -285,7 +282,7 @@ function App() {
             !Array.isArray(imported.tiles) ||
             !Array.isArray(imported.furniture)
           ) {
-            window.alert('Invalid layout file.');
+            window.alert('配置檔無效。');
             return;
           }
           const migrated = migrateLayoutColors(imported as unknown as OfficeLayout);
@@ -297,7 +294,7 @@ function App() {
           });
           editor.markClean();
         } catch {
-          window.alert('Failed to read or parse layout file.');
+          window.alert('無法讀取或解析配置檔。');
         }
       };
       reader.readAsText(file);
@@ -328,7 +325,7 @@ function App() {
     })();
 
   if (!layoutReady) {
-    return <div className="w-full h-full flex items-center justify-center ">Loading...</div>;
+    return <div className="w-full h-full flex items-center justify-center ">載入中…</div>;
   }
 
   return (
@@ -371,7 +368,7 @@ function App() {
               className="absolute left-1/2 -translate-x-1/2 z-11 bg-accent-bright text-white text-sm py-3 px-8 rounded-none border-2 border-accent shadow-pixel pointer-events-none whitespace-nowrap"
               style={{ top: editor.isDirty ? 64 : 8 }}
             >
-              Rotate (R)
+              旋轉（R）
             </div>
           )}
 
@@ -456,7 +453,7 @@ function App() {
           Detection Active" before anything is installed would be a lie. */}
       {hooksEnabled && claudeHooksInstalled && !hooksInfoShown && !hooksTooltipDismissed && (
         <Tooltip
-          title="Instant Detection Active"
+          title="即時偵測已啟用"
           position="top-right"
           onDismiss={() => {
             setHooksTooltipDismissed(true);
@@ -464,7 +461,7 @@ function App() {
           }}
         >
           <span className="text-sm text-text leading-none">
-            Your agents now respond in real-time.{' '}
+            你的代理人現在會即時反應。{' '}
             <span
               className="text-accent cursor-pointer underline"
               onClick={() => {
@@ -473,7 +470,7 @@ function App() {
                 transport.send({ type: 'setHooksInfoShown' });
               }}
             >
-              View more
+              了解更多
             </span>
           </span>
         </Tooltip>
@@ -483,30 +480,30 @@ function App() {
       <Modal
         isOpen={isHooksInfoOpen}
         onClose={() => setIsHooksInfoOpen(false)}
-        title="Instant Detection is ON"
+        title="即時偵測已開啟"
         zIndex={52}
       >
         <div className="text-base text-text px-10" style={{ lineHeight: 1.4 }}>
-          <p className="mb-8">Your Pixel Agents office now reacts in real-time:</p>
+          <p className="mb-8">你的 Pixel Agents 辦公室現在會即時反應：</p>
           <ul className="mb-8 pl-18 list-disc m-0">
-            <li className="text-sm mb-2">Permission prompts appear instantly</li>
-            <li className="text-sm mb-2">Turn completions detected the moment they happen</li>
-            <li className="text-sm mb-2">Sound notifications play immediately</li>
+            <li className="text-sm mb-2">權限確認會立刻出現</li>
+            <li className="text-sm mb-2">回合結束的瞬間就會偵測到</li>
+            <li className="text-sm mb-2">音效通知會立刻播放</li>
           </ul>
           <p className="mb-12 text-text-muted">
-            This works through Claude Code Hooks, small event listeners that notify Pixel Agents
-            whenever something happens in your Claude sessions.
+            這是透過 Claude Code 掛勾（hooks）達成的：這些小型事件監聽器會在你的 Claude
+            對話發生事情時通知 Pixel Agents。
           </p>
           <div className="text-center">
             <button
               onClick={() => setIsHooksInfoOpen(false)}
               className="py-4 px-20 text-lg bg-accent text-white border-2 border-accent rounded-none cursor-pointer shadow-pixel"
             >
-              Got it
+              知道了
             </button>
           </div>
           <p className="mt-8 text-xs text-text-muted text-center">
-            To disable, go to Settings {'>'} Instant Detection
+            要關閉，請到 設定 {'>'} 即時偵測
           </p>
         </div>
       </Modal>
